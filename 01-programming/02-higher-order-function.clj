@@ -7,7 +7,6 @@
       (defn sum-sq [a b] (if (> a b) 0 (+ (Math/pow a 2) (sum-sq (inc a) b))))
       (sum-sq 1 4)))
 
-
 (comment
   "Re-implementing the above by havng a general abstraction for all sums"
   (do (defn sum
@@ -19,7 +18,6 @@
       ;; "We can also have a new implementation for sum-sq like so:"
       (defn sum-sq [a b] (sum #(Math/pow % 2) a b #(inc %)))
       (sum-sq 1 4)))
-
 
 (comment
   "computing derivative"
@@ -41,7 +39,6 @@
         (if (or (< (Math/abs (- next-x x)) tolerance) (>= iter max-iterations))
           (do (println "newtons-method took" iter "iterations") next-x)
           (recur next-x (inc iter)))))))
-
 
 (comment
   "Using newton method to possibly derive a value for the square root of x"
