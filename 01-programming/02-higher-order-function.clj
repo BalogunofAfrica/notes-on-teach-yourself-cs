@@ -30,8 +30,8 @@
   "Implementing Netwons Method"
   (defn newtons-method
     "Calculates a root of a function using Newton's method."
-    [f f-prime x0 tolerance max-iterations]
-    (loop [x x0
+    [f f-prime guess tolerance max-iterations]
+    (loop [x guess
            iter 0]
       (let [fx (f x)
             fpx (f-prime x)
@@ -41,11 +41,15 @@
           (recur next-x (inc iter)))))))
 
 (comment
-  "Using newton method to possibly derive a value for the square root of x"
-  "Let's say x is 10"
-  (do (defn f [x] (- (* x x) 1e50))
-      (defn f-prime [x] (derivative f x 1e-6))
-      (println (newtons-method f f-prime 1 1e-6 100))))
+  "Using newton method to possibly derive a value for the square root of n"
+  "Let's say n is 10"
+  (do (def n 10)
+      (def guess 2)
+      (def tolerance 1e-6)
+      (def max-iterations 100)
+      (defn f [x] (- (* x x) n))
+      (defn f-prime [x] (derivative f x tolerance))
+      (println (newtons-method f f-prime guess tolerance max-iterations))))
 
 (comment
   (defn average
