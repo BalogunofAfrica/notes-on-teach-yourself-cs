@@ -55,13 +55,13 @@ CHIP ALU {
         Mux16(a= fOut, b= noOut, sel= no, out= out);
 
         // Compute zr and ng
-        Mux16(a= fOut, b= noOut, sel= no, out[0..7]= tempOut1, out[8..15]= tempOut2);
+        Mux16(a= fOut, b= noOut, sel= no, out[0..7]= tempOut1, out[8..15]= tempOut2, out[15]=msb);
         Or8Way(in= tempOut1, out= or1);
         Or8Way(in= tempOut2, out= or2);
         Or(a= or1, b= or2, out= anyBit);
         Not(in= anyBit, out= zr);
         
         // If msb is 1, out is negative
-        And(a= anyBit, b= true, out= ng);
+        And(a= msb, b= true, out= ng);
     //// Replace this comment with your code.
 }
